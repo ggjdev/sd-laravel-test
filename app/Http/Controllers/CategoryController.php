@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,5 +16,28 @@ class CategoryController extends Controller
         return view('categories.index', [
             'categories' => $categories,
         ]);
+    }
+
+    public function create(): View
+    {
+        return view('categories.form');
+    }
+
+    public function store(CategoryRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+        $userCategories = $request->user()->categories();
+
+        $category = $userCategories->where('id', $request->get('category_id'))
+            ->first();
+
+        if (!$category) {
+            $category = $userCategories->make();
+        }
+
+        $category->fill($validated);
+        $category->save();
+
+        return redirect(route('categories.index'))->with('status', 'Category Saved');
     }
 }

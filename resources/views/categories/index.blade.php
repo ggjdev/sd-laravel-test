@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Categories') }}</div>
+                <div class="card-header">{{ __('Categories') }}<a href="{{ route('categories.create') }}" class="float-right btn btn-primary btn-sm">{{ __('Create Category') }}</a></div>
 
                 <div class="card-body">
                     @if (session('status'))
