@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -39,5 +40,14 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect(route('categories.index'))->with('status', 'Category Saved');
+    }
+
+    public function edit(Request $request, Category $category): View
+    {
+        abort_if($category->user_id !== $request->user()->id, 404);
+
+        return view('categories.form', [
+            'category' => $category,
+        ]);
     }
 }

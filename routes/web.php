@@ -39,5 +39,5 @@ Route::group([
 
     // Category routes
     Route::resource('categories', CategoryController::class)
-        ->only(['index', 'create', 'store']);
+        ->only(['index', 'create', 'store', 'edit']);
 });

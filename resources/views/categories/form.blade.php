@@ -13,7 +13,7 @@
 
                 <div class="card-body">
 
-                    <form action="{{ route('categories.store', $category->id ?? null) }}" method="post">
+                    <form action="{{ route('categories.store', ['category_id' => $category->id ?? null]) }}" method="post">
                         @csrf
 
                         <div class="form-group">

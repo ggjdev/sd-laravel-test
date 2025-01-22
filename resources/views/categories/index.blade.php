@@ -16,7 +16,7 @@
 
                     <ul class="list-group list-group-flush">
                         @foreach ($categories as $category)
-                            <li class="list-group-item"><a href="#">{{ $category->name }}</a></li>
+                            <li class="list-group-item"><a href="{{ route('categories.edit', $category) }}">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>

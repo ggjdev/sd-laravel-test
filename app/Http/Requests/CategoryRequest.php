@@ -14,6 +14,10 @@ class CategoryRequest extends FormRequest
             return $query->where('user_id', $this->user()->id);
         });
 
+        if (isset($this->category_id)) {
+            $uniqueNameRule->ignore($this->category_id);
+        }
+
         return [
             'name' => ['required', 'max:40', $uniqueNameRule],
         ];
