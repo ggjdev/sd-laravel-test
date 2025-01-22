@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Categories') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,9 +14,11 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('note.list') }}">{{ __('View Notes') }}</a>
-                    <br />
-                    <a href="{{ route('categories.index') }}">{{ __('View Categories') }}</a>
+                    <ul class="list-group list-group-flush">
+                        @foreach ($categories as $category)
+                            <li class="list-group-item"><a href="#">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
