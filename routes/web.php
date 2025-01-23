@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
 
@@ -24,7 +25,7 @@ Route::group([
     'middleware' => ['auth']
 ], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
+
     // Note Routes
     Route::group([
         'as'            => 'note.',
@@ -35,4 +36,8 @@ Route::group([
         Route::get('/{note_id}', [NoteController::class, 'view'])->name('view');
         Route::post('/{note_id?}', [NoteController::class, 'store'])->name('store');
     });
+
+    // Category routes
+    Route::resource('categories', CategoryController::class)
+        ->only(['index', 'create', 'store', 'edit']);
 });
